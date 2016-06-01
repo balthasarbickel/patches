@@ -214,3 +214,15 @@ drop.tip.densityMap<-function(x,tip){
 		return(x)
 	} else cat("x should be an object of class \"densityMap\"\n")
 }
+
+
+makeMappedEdge<-function(edge,maps){
+	st<-sort(unique(unlist(sapply(maps,function(x) names(x)))))
+	mapped.edge<-matrix(0,nrow(edge),length(st))
+	rownames(mapped.edge)<-apply(edge,1,function(x) paste(x,collapse=","))
+	colnames(mapped.edge)<-st
+	for(i in 1:length(maps)) 
+		for(j in 1:length(maps[[i]])) 
+			mapped.edge[i,names(maps[[i]])[j]]<-mapped.edge[i,names(maps[[i]])[j]]+maps[[i]][j]
+	return(mapped.edge)
+}
