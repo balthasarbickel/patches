@@ -1,7 +1,6 @@
 # function plots posterior density of mapped states from stochastic mapping
 # written by Liam J. Revell 2012, 2013, 2014, 2015
 # minor patch on lines 154 and 177 where I added "subtitle=''" to add.color.bar so that the length of the scale is not printed. I found this confusing for the audience and not necessary for my purposes. [Balthasar Bickel, May 6, 2016]
-# additional patch by adding a show.tip.label [Balthasar Bickel, Nov 6, 2016]
 
 densityMap<-function(trees,res=100,fsize=NULL,ftype=NULL,lwd=3,check=FALSE,legend=NULL,
 	outline=FALSE,type="phylogram",direction="rightwards",plot=TRUE,...){
@@ -83,7 +82,7 @@ densityMap<-function(trees,res=100,fsize=NULL,ftype=NULL,lwd=3,check=FALSE,legen
 ## also used internally by plot.contMap
 ## written by Liam J. Revell 2012, 2013, 2014, 2015, 2016
 
-plot.densityMap<-function(x,show.tip.label=T,...){
+plot.densityMap<-function(x,...){
 	if(class(x)=="densityMap"){
 		tree<-x$tree
 		cols<-x$cols
@@ -123,7 +122,6 @@ plot.densityMap<-function(x,show.tip.label=T,...){
 	if(length(fsize)==1) fsize<-rep(fsize,2)
 	if(is.null(ftype)) ftype<-c("i","reg")
 	if(length(ftype)==1) ftype<-c(ftype,"reg")
-	if(!show.tip.label) ftype[1] <- 'off'
 	# done optional arguments
 	if(legend){
 		if(legend>max(H)){ 
@@ -154,7 +152,7 @@ plot.densityMap<-function(x,show.tip.label=T,...){
 			dig<-max(sapply(strsplit(leg.txt[c(1,3)],split=""),ff))
 			add.color.bar(legend,cols,title=leg.txt[2],lims<-as.numeric(leg.txt[c(1,3)]),
 				digits=dig,prompt=FALSE,x=if(direction=="leftwards") max(H)-legend else 0,
-				y=1-0.08*(N-1),lwd=lwd[2], subtitle="",
+				y=1-0.08*(N-1),lwd=lwd[2], subtitle=subtitle,
 				fsize=fsize[2],
 				direction=if(!is.null(xlim)) if(xlim[2]<xlim[1]) "leftwards" else "rightwards" else "rightwards")
 		}
