@@ -83,7 +83,7 @@ densityMap<-function(trees,res=100,fsize=NULL,ftype=NULL,lwd=3,check=FALSE,legen
 ## also used internally by plot.contMap
 ## written by Liam J. Revell 2012, 2013, 2014, 2015, 2016
 
-plot.densityMap<-function(x,show.tip.label=T,...){
+plot.densityMap<-function(x,show.tip.label=T, lend=0, ...){
 	if(class(x)=="densityMap"){
 		tree<-x$tree
 		cols<-x$cols
@@ -144,7 +144,7 @@ plot.densityMap<-function(x,show.tip.label=T,...){
 			par(col="black")
 		}
 		plotSimmap(tree,cols,pts=FALSE,lwd=lwd[1],fsize=fsize[1],mar=mar,ftype=ftype[1],add=outline,
-			xlim=xlim,ylim=ylim,direction=direction,offset=offset,hold=FALSE)
+			xlim=xlim,ylim=ylim,direction=direction,offset=offset,hold=FALSE, lend=lend)
 		if(legend){
 			ff<-function(dd){
 				if(!("."%in%dd)) dig<-0
